@@ -1,0 +1,679 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/////字型/////
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+$font-family:'Noto Sans TC', sans-serif;
+
+$font-d-48: 700 48px/1.25 $font-family;
+$font-d-32: 700 32px/1.25 $font-family;
+$font-d-28: 700 28px/1.25 $font-family;
+$font-d-24: 700 24px/1.25 $font-family;
+$font-d-18: 700 18px/1.5 $font-family;
+$font-d-16: 700 16px/1.5 $font-family;
+$font-d-12: 400 12px/1.5 $font-family;
+
+$font-t-20: 400 20px/1.5 $font-family;
+$font-t-18: 400 18px/1.5 $font-family;
+$font-t-16: 400 16px/1.5 $font-family;
+$font-t-14: 400 14px/1.5 $font-family;
+
+$font-symtext: 400 29px/1.25 $font-family;
+$font-unit: 700 12px/1.5 $font-family;  //可以用sub來著？
+/////顏色/////
+$brand-green: #56C4C5;
+$brand-yellow: #FFD153;
+$brand-red: #FF5D50;
+$t-gray-pri: #221E1F;
+$t-gray-sec: #747474;
+$white: #FFFFFF;
+$component-gray: #DDDDDD;
+.bg-gray{
+    background: #F5F5F5;
+}
+.bg-gray-light{
+    background: #F7F9FD;
+}
+
+/////陰影＆圓角/////
+.shadow{
+    box-shadow: 0 2px 10px #00000014;
+}
+.br-12{
+    border-radius: 12px;
+}
+/////好像有規律的margin/////
+
+/////好像有規律的字型/////
+.h1-48-32{
+    font: $font-d-48;
+}
+.h2-32-28{
+    font: $font-d-32;
+}
+@media(max-width:576px){
+    .h1-48-32{
+        font: $font-d-32;
+    }
+    .h2-32-28{
+        font: $font-d-28;
+    }
+}
+//////////
+@mixin pad{
+    @media(max-width: 992px){
+        @content;
+    }
+}
+@mixin mobile{
+    @media(max-width: 576px){
+        @content;
+    }
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    // outline: #221E1F 1px solid;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+a{
+    text-decoration: none;
+}
+
+.container{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+@media(max-width: 992px){
+    .container{
+        padding: 0 20px;
+    }
+}
+/////按鈕樣式/////
+.btn-g{
+    background: $brand-green;
+    border-radius: 27px;
+    border: $brand-green 1px solid;
+    color: $white;
+    padding:10px 31px;
+    font: $font-t-18;
+    display: inline-block;
+    &:hover{
+        background: $white;
+        color: $brand-green;
+    }
+}
+.btn-r{
+    background: $brand-red;
+    border-radius: 22px;
+    color: $white;
+    padding: 8px 32px;
+    font: $font-t-16;
+    &:hover{
+        background: $white;
+        background: darken($brand-red,10%);
+    }
+}
+/////水平分隔線/////
+.hr{
+    width: 100%;
+    border: $component-gray 0.5px solid;
+}
+/////header/////
+header{
+    height: 100vh;
+    background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/home.svg"), url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/bg_home.svg");
+    background-position: center right 10%, top right;
+    background-repeat: no-repeat, no-repeat;
+    background-size: auto 69.5vh, auto 100vh;
+
+    margin-bottom: 100px;
+
+    position: relative;
+
+    @include mobile{
+        background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/home.svg"), url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/bg_home_sm.svg");
+        background-position:bottom 32px center , bottom 32px center;
+        background-repeat: no-repeat, no-repeat;
+        background-size: auto 45.73vh, auto 36.7vh;
+
+        margin-bottom: 60px;
+    }
+}
+.hero-ball{
+    position: absolute;
+    width: 138px;
+    height: 360px;
+    top: calc(100vh - 180px);
+    background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/ball01.svg");
+    background-position: right;
+    @include mobile{
+        width: 49px;
+        height: 126px;
+        top: calc(100vh + 60px + 15px);
+        background-size: cover;
+    }
+}
+.navbar{
+    padding-top: 24px;
+    padding-bottom: 24px;
+    @include mobile{
+        padding-top: 16px;
+        padding-bottom: 14px;
+        border-bottom: $brand-yellow 2px solid;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a{
+        display: block;
+    }
+    img{
+        height: 40px;
+        @include mobile{
+            height: 24px;
+        }
+    }
+}
+.banner{
+    display: flex;
+    align-items: center;
+    height: calc(100% - 88px); //88是navbar的高度
+    color: $t-gray-pri;
+    @include mobile{
+        height: auto;
+    }
+    &-text{
+        margin-top: -88px; //讓banner-text可以在header置中
+        @include mobile{
+            margin-top: 32px;
+        }
+    }
+    h2{
+        font: $font-d-18;
+        color: $brand-green;
+        margin-bottom: 8px;
+        @include mobile{
+            font: $font-d-16;
+        }
+    }
+    p{
+        font: $font-d-48;
+        margin-bottom: 16px;
+        @include mobile{
+            font: $font-d-32;
+        }
+    }
+    h3{
+        font: $font-t-20;
+        @include mobile{
+            font: $font-t-16;
+        }
+    }
+}
+/////platform/////
+.platform{
+    margin:0 59.5px 100px 59.5px;
+    color: $t-gray-pri;
+    text-align: center;
+    @include pad{
+        margin:0 0 60px 0;
+    }
+    @include mobile{
+        margin: 0 0 36px 0;
+    }
+    h2{
+        margin-bottom: 48px;
+        @include pad{
+            margin-bottom: 32px;
+        }
+    }
+    &-list{
+        display: flex;
+        justify-content: space-between;
+        @include mobile{
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+    img{
+        width: 90px;
+        height: 90px;
+        margin-bottom: 24px;
+        @include pad{
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+        }
+    }
+    h3{
+        font: $font-d-24; 
+        margin-bottom: 24px;  
+        @include pad{
+            margin-bottom: 16px;
+        }
+    }
+    p{
+        font: $font-t-16;
+        color: $t-gray-sec;
+    }
+    &-item{
+        @include mobile{
+            width: 100%;
+            margin-bottom: 24px;
+        }
+    }
+}
+.ball-platform{
+    width: 138px;
+    height: 360px;
+    background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/ball01.svg");
+    background-size: cover;
+
+    position: absolute;
+    left: 0;
+    top: -280px;
+}
+/////custimized-service/////
+.custimize-service{
+    color: $t-gray-pri;
+    text-align: center;
+    margin-bottom: 100px;
+
+    position: relative;
+    h2{
+        margin-bottom: 16px;
+    }
+    .section-description{
+        font: $font-t-20;
+        margin-bottom: 48px;
+    }
+    .situation-list{
+        display: flex;
+        margin-left: -8px;
+        margin-right: -8px;
+        .situation-type{
+            width: 260px;
+            margin: 0 8px;
+            background-color: #FFFFFF;
+        }
+        img{
+            margin-bottom: 16px;
+            border-radius: 12px 12px 0 0;
+        }
+        h3{
+            font: $font-d-16;
+            color: $brand-green;
+            margin-bottom: 16px;
+        }
+        p{
+            font: $font-t-16;
+            margin-bottom: 24px;
+        }
+    }
+}
+.ball-green-02{
+    position: absolute;
+    width: 210px;
+    height: 310px;
+    right: 0;
+    top: 410px;
+    z-index: -1;
+    background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/ball02.svg");
+    background-size: cover;
+    @include mobile{
+        width: 88px;
+        height: 135px;
+        top: calc(100% - 135px) ;
+    }
+}
+@media(max-width: 992px){
+    .custimize-service{
+        margin-bottom: 36px;
+        .section-description{
+            margin-bottom: 32px;
+        }
+        .situation-list{
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin: 0;
+            .situation-type{
+                width: 40%;
+                margin: 0 0 24px 0;
+            }
+        }
+    }
+}
+@media(max-width: 576px){
+    .custimize-service{
+        .section-description{
+            font: $font-t-18;
+        }
+        .situation-list{
+            justify-content: center;
+            .situation-type{
+                width: 260px;
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+        }
+    }
+}
+
+/////feature/////
+.feature{
+    display: flex;
+    margin-bottom: 72px;
+    justify-content: space-between;
+    align-items: center;
+
+    color: $t-gray-pri;
+    &-list{
+        width: 48.8%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        li{
+            width: 230px;
+            padding: 32px 32px 48px 32px;
+            margin-bottom: 28px;
+        }
+        h3{
+            font: $font-d-18;
+            margin-bottom: 16px;
+        }
+        p{
+            font: $font-t-16;
+        }
+    }
+    .img-container{
+        width: 86px;
+        height: 86px;
+        border-radius: 50px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-description{
+        width: 38.1%;
+        margin-right: 49px;
+        h2{
+            margin-bottom: 16px;
+        }
+        p{
+            font: $font-t-18;
+            margin-bottom: 24px;
+        }
+    }
+}
+@media(max-width: 992px){
+    .feature{
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        margin-bottom: 36px;
+        &-list{
+            width: 100%;
+            justify-content: space-evenly;
+            li{
+                width: 40%;
+                margin-bottom: 24px;
+            }
+        }
+        .main-description{
+            width: 100%;
+            text-align: center;
+            margin-right: 0;
+            margin-bottom: 32px;
+            p{
+                margin-bottom: 16px;
+            }
+        }
+    }
+}
+@media(max-width: 576px){
+    .feature{
+        &-list{
+            width: 100%;
+            li{
+                width: 230px;
+                margin-right: 5%;
+                margin-left: 5%;
+                padding: 32px 41px 48px 24px;
+            }
+            h3{
+                margin-bottom: 20px;
+            }
+        }        
+        .main-description{
+            p{
+                font: $font-t-16;
+            }
+        }
+    }
+
+}
+/////comment-display/////
+.comment-display{
+    position: relative;
+    margin-bottom: 100px;
+    h2{
+        text-align: center;
+    }
+    .comment-list{
+        display: flex;
+        color: $t-gray-pri;
+        margin: 104px -8px 24px -8px;
+    }
+    .comment-unit{
+        position: relative;
+        width: 32.25%;
+        margin: 0 8px;
+        background-color: #FFFFFF;
+    }
+    .user-img{
+        position: absolute;
+        left: 32px;
+        top: -56px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50px;
+    }
+    .user-comment{
+        padding: 48px 32px 24px 32px;
+        font: $font-t-16;
+        @include mobile{
+            padding: 48px 16px 16px 16px;
+        }
+        .comment{
+            margin-bottom: 24px;
+            @include mobile{
+                margin-bottom: 16px;
+            }
+        }
+        h3{
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font: $font-d-16;
+            @include mobile{
+                margin-top: 16px;
+            }
+        }
+    }
+    .user-evaluation{
+        display: flex;
+        justify-content: space-between;
+        .value{
+            display: flex;
+            width: 121px;
+            justify-content: space-evenly;
+        }
+        li{
+            display: flex;
+            align-items: center;
+        }
+        img{
+            width: 16.78px;
+            height: 16px;
+        }
+    }
+    .pagination{
+        display: flex;
+        justify-content: center;
+        li{
+            margin-right: 8px;
+        }
+        & :last-child{
+            margin-right: 0;
+        }
+        a{
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50px;
+            background-color: $component-gray;
+        }
+        .active{
+            width: 16px;
+            background-color: $brand-yellow;
+        }
+    }
+}
+.ball-yellow-03{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 41px;
+    left: -89px;
+    background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/ball03.svg");
+    background-size: cover;
+    @include pad{
+        left: -30px
+    }
+    @include mobile{
+        width: 77px;
+        height: 153px;
+        top: 40px;
+        left: 0;
+        background-position: right;
+    }
+}
+@media(max-width: 992px){
+    .comment-display{
+        margin-bottom: 60px;
+        .comment-list{
+            margin: 88px 0 24px 0;
+            justify-content: space-evenly;
+            >li:nth-child(3){
+                display: none;
+            }
+        }
+        .comment-unit{
+            width: 40%;
+            margin: 0;
+        }
+    }
+}
+@media(max-width: 576px){
+    .comment-display{
+        .comment-list{
+            justify-content: center;
+            >li:nth-child(2){
+                display: none;
+            }
+        }
+        .comment-unit{
+            width: 100%;
+        }
+    }
+}
+/////footer-CTA & footer/////
+.footer-CTA{
+    background-image: url("https://raw.githubusercontent.com/hexschool/webLayoutTraining1st/53d3c0b0e4d2885789ac1fcb666e427365a39207/chatTalker_images/home_footer.svg");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    h2{
+        font: $font-d-32;
+        color: $t-gray-pri;
+        margin-bottom: 48px;
+    }
+    .container{
+        text-align: center;
+        padding-top: 260px;
+        padding-bottom: 100px;
+    }
+}
+@media(max-width: 992px){
+    .footer-CTA{
+        .container{
+            padding-top: 293px;
+            padding-bottom: 60px;
+        }
+    }
+}
+@media(max-width: 576px){
+    .footer-CTA{
+        h2{
+            margin-bottom: 24px;
+            font: $font-d-24;
+        }
+    }
+}
+
+footer p{
+    padding: 16px 0;
+    text-align: center;
+    font: $font-t-16;
+    color: $t-gray-pri;
+}
+
